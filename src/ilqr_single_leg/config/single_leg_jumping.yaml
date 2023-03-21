@@ -1,0 +1,18 @@
+single_leg:
+    # Publish all joint states -----------------------------------
+    joint_state_controller:
+        type: joint_state_controller/JointStateController
+        publish_rate: 1000  
+
+    # Controllers ---------------------------------------
+    thigh_controller:
+        type: unitree_legged_control/UnitreeJointController
+        # type: effort_controllers/JointEffortController
+        joint: thigh_joint
+        pid: {p: 300.0, i: 0.0, d: 8.0}
+
+    calf_controller:
+        type: unitree_legged_control/UnitreeJointController
+        # type: effort_controllers/JointEffortController
+        joint: calf_joint
+        pid: {p: 300.0, i: 0.0, d: 8.0}

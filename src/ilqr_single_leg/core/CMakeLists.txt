@@ -1,0 +1,5 @@
+add_executable(single_leg_jumping_simulate single_leg_jumping_simulate.cpp)
+add_executable(single_leg_jumping_ilqr single_leg_jumping_ilqr.cpp)
+
+target_link_libraries(single_leg_jumping_simulate single_leg_without_point_trace_lib ${PYTHON_LIBRARIES} ${catkin_LIBRARIES})
+target_link_libraries(single_leg_jumping_ilqr single_leg_without_point_trace_lib lib_loss_function)

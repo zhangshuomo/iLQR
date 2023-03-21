@@ -1,0 +1,12 @@
+<launch>
+    <arg name="test_initial" default="false" />
+    <arg name="play_speed" default="1.0"/>
+
+    <param name="simulate_initial_trajectory" value="$(arg test_initial)"/>
+    <param name="speed_to_play" value="$(arg play_speed)"/>
+    <param name="contact_model" value="true"/>
+    <param name="robot_description" textfile="$(find ilqr_single_leg)/urdf/single_leg_jumping.urdf" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" />
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ilqr_single_leg)/config/single_leg_visualize.rviz"/>
+    <node pkg="ilqr_single_leg" type="single_leg_jumping_simulate" name="single_leg_jumping_simulate" required="true"/>
+</launch>

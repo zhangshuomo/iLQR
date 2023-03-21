@@ -1,0 +1,162 @@
+single_leg
+{
+    state_dim 16
+    input_dim 2
+    
+    total_time 3;
+    step_length 0.001;
+
+    k 6000
+    d 200
+    alpha_n 0.01
+    alpha_d 100
+    
+    Q
+    {
+        Q1 0; x position        
+        Q3 50; z position        
+        Q5 0; pitch (this should be set in case of the euler angles jump)  
+
+        Q7 20; thigh joint
+        Q8 30; calf joint
+
+        Q9 0;   x linear velocity in BF        
+        Q11 0;  z linear velocity in BF        
+        Q13 10;  angular vel y in BF    
+
+        Q15 0; thigh joint vel
+        Q16 0; calf joint vel 
+        
+        ; these need not to be set for sagittal plane single_leg robot:
+        Q2 0; y position 
+        Q4 0; roll 
+        Q6 0; yaw 
+        Q10 0;  y linear velocity in BF 
+        Q12 0;  angular vel x in BF 
+        Q14 0;  angular vel z in BF 
+    }
+    Q_a
+    {
+        Q1 0; x position        
+        Q3 10000; z position        
+        Q5 0; pitch (this should be set in case of the euler angles jump) 
+
+        Q7 0; thigh joint
+        Q8 0; calf joint
+
+        Q9 0;   x linear velocity in BF        
+        Q11 0;  z linear velocity in BF        
+        Q13 0;  angular vel y in BF     
+
+        Q15 0; thigh joint vel
+        Q16 0; calf joint vel 
+        
+        ; these need not to be set for sagittal plane single_leg robot:
+        Q2 0; y position 
+        Q4 0; roll 
+        Q6 0; yaw 
+        Q10 0;  y linear velocity in BF 
+        Q12 0;  angular vel x in BF 
+        Q14 0;  angular vel z in BF 
+    }
+    
+    Q_final
+    {
+        Q1 0; x position        
+        Q3 10; z position        
+        Q5 0; pitch (this should be set in case of the euler angles jump)  
+
+        Q7 30; thigh joint
+        Q8 40; calf joint
+
+        Q9 0;   x linear velocity in BF        
+        Q11 0;  z linear velocity in BF        
+        Q13 0; angular vel y in BF    
+
+        Q15 0.0; thigh joint vel
+        Q16 0.0; calf joint vel
+
+        ; these need not to be set for sagittal plane single_leg robot:
+        Q2 0; y position 
+        Q4 0; roll
+        Q6 0; yaw 
+        Q10 0;  y linear velocity in BF 
+        Q12 0; angular vel x in BF 
+        Q14 0; angular vel z in BF 
+    }
+
+    int_state
+    {
+        state1 0.0; x position        
+        state3 0.395; z position        
+        state5 0.0; pitch (this should be set in case of the euler angles jump)   
+
+        state7 0.67; thigh joint
+        state8 -1.3; calf joint
+
+        state9 0;   x linear velocity in BF        
+        state11 0;  z linear velocity in BF        
+        state13 0;  angular vel y in BF 
+
+        state15 0; thigh joint vel
+        state16 0; calf joint vel 
+        
+        ; these need not to be set for sagittal plane single_leg robot:
+        state2 0; y position 
+        state4 0; roll 
+        state6 0; yaw 
+        state10 0;  y linear velocity in BF 
+        state12 0;  angular vel x in BF 
+        state14 0;  angular vel z in BF 
+    }
+    state_a
+    {
+        state1 0; x position        
+        state3 1.0; z position        
+        state5 0; pitch (this should be set in case of the euler angles jump)         
+        state7 0; thigh joint
+        state8 0; calf joint
+        state9 0;   x linear velocity in BF        
+        state11 0;  z linear velocity in BF        
+        state13 0;  angular vel y in BF        
+        state15 0; thigh joint vel
+        state16 0; calf joint vel 
+        
+        ; these need not to be set for sagittal plane single_leg robot:
+        state2 0; y position 
+        state4 0; roll 
+        state6 0; yaw 
+        state10 0;  y linear velocity in BF 
+        state12 0;  angular vel x in BF 
+        state14 0;  angular vel z in BF 
+    }
+    final_state
+    {
+        state1 0.0; x position        
+        state3 0.395; z position        
+        state5 0; pitch (this should be set in case of the euler angles jump) 
+
+        state7 0.67; thigh joint
+        state8 -1.3; calf joint
+
+        state9 0;   x linear velocity in BF        
+        state11 0;  z linear velocity in BF        
+        state13 0;  angular vel y in BF    
+
+        state15 0; thigh joint vel
+        state16 0; calf joint vel 
+        
+        ; these need not to be set for sagittal plane single_leg robot:
+        state2 0; y position 
+        state4 0; roll 
+        state6 0; yaw 
+        state10 0;  y linear velocity in BF 
+        state12 0;  angular vel x in BF 
+        state14 0;  angular vel z in BF 
+    }
+    R
+    {
+        R1 0.05; 
+        R2 0.05;
+    }
+}

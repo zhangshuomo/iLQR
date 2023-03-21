@@ -1,0 +1,1 @@
+add_library(lib_loss_function loss_function.cpp)
