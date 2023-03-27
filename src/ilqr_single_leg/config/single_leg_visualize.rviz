@@ -9,10 +9,6 @@ Panels:
         - /TF1
         - /TF1/Frames1
         - /TF1/Tree1
-        - /TF1/Tree1/base1
-        - /TF1/Tree1/base1/trunk1
-        - /TF1/Tree1/base1/trunk1/thigh1
-        - /TF1/Tree1/base1/trunk1/thigh1/calf1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz/Selection
@@ -105,7 +101,7 @@ Visualization Manager:
       Frames:
         All Enabled: false
         base:
-          Value: true
+          Value: false
         calf:
           Value: false
         foot:
@@ -113,7 +109,7 @@ Visualization Manager:
         thigh:
           Value: false
         trunk:
-          Value: true
+          Value: false
       Marker Alpha: 1
       Marker Scale: 1
       Name: TF
@@ -193,5 +189,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1200
-  X: 2269
-  Y: 217
+  X: 288
+  Y: 140

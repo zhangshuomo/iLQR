@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     ros::Publisher pub = nh.advertise<sensor_msgs::JointState>("/joint_states",10);
 
     char* load_controller_path;
-    bool simulate_initial_trajectory=ros::param::param("simulate_initial_trajectory", true);
+    bool simulate_initial_trajectory=ros::param::param("simulate_initial_trajectory", false);
     if(simulate_initial_trajectory)
         load_controller_path="/home/zhangduo/test_ws/controller_parameter";
     else
