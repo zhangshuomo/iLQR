@@ -27,8 +27,8 @@ void save_controller_params(const std::vector<Eigen::MatrixXd>& feedback_gains,
 }
 
 void load_controller_params(std::vector<Eigen::MatrixXd> &feedback_gains,
-                           std::vector<Eigen::VectorXd> &feedforward_controls,
-                           const char* file_path="/home/zhangduo/test_ws/controller_parameter"){
+                            std::vector<Eigen::VectorXd> &feedforward_controls,
+                            const char* file_path="/home/zhangduo/test_ws/controller_parameter"){
     std::ifstream matrixDataFile(file_path);
 
     std::string matrixRowString;

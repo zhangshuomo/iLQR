@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     Control input;
     
     bool contact_model=ros::param::param("contact_model", true);
-    SingleLeg single_leg(contact_model, robot_params.k, robot_params.d, robot_params.alpha_n, robot_params.alpha_d);
+    SingleLeg single_leg(contact_model, robot_params.k, robot_params.d, robot_params.alpha_n, robot_params.alpha_d, robot_params.step_length);
     SingleLegTpl<double> single_leg_tpl(contact_model, robot_params.k, robot_params.d, robot_params.alpha_n, robot_params.alpha_d);
     
     double speed_to_play;
