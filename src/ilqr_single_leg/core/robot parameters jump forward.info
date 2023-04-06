@@ -3,8 +3,8 @@ single_leg
     state_dim 16
     input_dim 2
     
-    total_time 5;
-    step_length 0.002;
+    total_time 3;
+    step_length 0.001;
 
     k 6000
     d 200
