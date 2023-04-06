@@ -69,8 +69,7 @@ int main(int argc, char *argv[])
     SingleLeg single_leg(contact_model, robot_params.k, robot_params.d, robot_params.alpha_n, robot_params.alpha_d, robot_params.step_length);
     SingleLegTpl<double> single_leg_tpl(contact_model, robot_params.k, robot_params.d, robot_params.alpha_n, robot_params.alpha_d);
     
-    double speed_to_play;
-    nh.getParam("speed_to_play", speed_to_play);
+    double speed_to_play=ros::param::param("speed_to_play", 1.0);
 
     // get controller parameters
     std::vector<Eigen::MatrixXd> feedback_gains;

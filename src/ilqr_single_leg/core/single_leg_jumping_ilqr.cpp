@@ -47,8 +47,8 @@ void iLQR(const State &initial_state,
     std::vector<Eigen::VectorXd> feedforward_controls;
     
     // check before simulation
-    assert(feedback_res_gains.size()==time_steps);
-    assert(feedforward_res_controls.size()==time_steps);
+    assert(feedback_res_gains.size()>=time_steps);
+    assert(feedforward_res_controls.size()>=time_steps);
 
     // simulate the system
     State current_state=initial_state;
@@ -136,28 +136,40 @@ void iLQR(const State &initial_state,
         while(true){
             current_state=initial_state;
             new_state_traj.push_back(current_state);
-            for(int i=0;i<time_steps;++i){
-                /* Control current_control=control_traj[i]+(-feedback_gains[i])*(current_state-state_traj[i])+
-                                         alpha*(-control_traj[i]+(-feedback_gains[i])*state_traj[i]-feedforward_controls[i]); */
-                Control feedforward=(1-alpha)*(control_traj[i]+feedback_gains[i]*state_traj[i])-alpha*feedforward_controls[i];
-                Eigen::MatrixXd feedback_gain = -feedback_gains[i];
-                Control current_control = feedforward + feedback_gain * current_state;
-                
-                // std::cout<<"time stpes:"<<i<<"\tcurrent control:"<<current_control.transpose()<<std::endl;
-                State next_state=single_leg.forward_dyn(current_state, current_control);
-                total_loss+=loss_function.intermidiate_loss(current_state, current_control, i);
+            try{
+                for(int i=0;i<time_steps;++i){
+                    /* Control current_control=control_traj[i]+(-feedback_gains[i])*(current_state-state_traj[i])+
+                                            alpha*(-control_traj[i]+(-feedback_gains[i])*state_traj[i]-feedforward_controls[i]); */
+                    Control feedforward=(1-alpha)*(control_traj[i]+feedback_gains[i]*state_traj[i])-alpha*feedforward_controls[i];
+                    Eigen::MatrixXd feedback_gain = -feedback_gains[i];
+                    Control current_control = feedforward + feedback_gain * current_state;
+                    
+                    State next_state=single_leg.forward_dyn(current_state, current_control);
+                    total_loss+=loss_function.intermidiate_loss(current_state, current_control, i);
 
-                feedback_res_gains.push_back(feedback_gain);
-                feedforward_res_controls.push_back(feedforward);
+                    feedback_res_gains.push_back(feedback_gain);
+                    feedforward_res_controls.push_back(feedforward);
 
-                new_control_traj.push_back(current_control);
-                new_state_traj.push_back(next_state);
+                    new_control_traj.push_back(current_control);
+                    new_state_traj.push_back(next_state);
 
-                if(std::isnan(total_loss)){
-                    throw(std::runtime_error("nan encountered!"));
+                    if(std::isnan(total_loss)){
+                        throw(std::runtime_error("nan encountered!"));
+                    }
+
+                    current_state=next_state;
                 }
-
-                current_state=next_state;
+            }
+            catch(std::runtime_error){
+                std::cerr<<"NaN encountered!"<<std::endl;
+                for(int i = 0; i < feedback_res_gains.size(); ++i){                    
+                    std::cout<<"time stpes:"<<i<<"\nfeedback gains:\n"<<feedback_res_gains[i]<<std::endl;
+                    std::cout<<"feedforward controls:\n"<<feedforward_res_controls[i].transpose()<<std::endl;
+                    std::cout<<"current state:\n"<<new_state_traj[i].transpose()<<std::endl;                    
+                    std::cout<<"current control:\n"<<new_control_traj[i].transpose()<<std::endl;
+                    std::cout<<"---------------------------"<<std::endl;
+                }      
+                throw(std::runtime_error("nan encountered!"));       
             }
             total_loss+=loss_function.final_loss(current_state);
 

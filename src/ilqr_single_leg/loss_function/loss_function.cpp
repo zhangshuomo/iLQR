@@ -37,7 +37,7 @@ LossFunction::LossFunction(int state_dim, int control_dim, double whole_time, in
 double LossFunction::intermidiate_loss(const Eigen::VectorXd& state,const Eigen::VectorXd& control, int time_step){
     auto state_diff = state - state_traj[time_step];
     Eigen::MatrixXd intermidiate=state_diff.transpose()*Q*dT*state_diff+control.transpose()*R*dT*control;
-    if(time_step>2000 && time_step<2100){
+    if(time_step>1500 && time_step<1600){
         auto state_diff_a = state - state_a;
         intermidiate += state_diff_a.transpose()*Qa*dT*state_diff_a;
     }
@@ -45,8 +45,9 @@ double LossFunction::intermidiate_loss(const Eigen::VectorXd& state,const Eigen:
 }
 
 Eigen::MatrixXd LossFunction::hessian_cost_to_state(const Eigen::VectorXd& current_state,const Eigen::VectorXd& control, int time_step){
-    if(time_step>2000 && time_step<2100)
+    if(time_step>1500 && time_step<1600)
         return 2*Q*dT+2*Qa*dT;
+        // return 2*Qa*dT;
     else
         return 2*Q*dT;
 }
@@ -56,8 +57,9 @@ Eigen::MatrixXd LossFunction::hessian_cost_to_control(const Eigen::VectorXd& cur
 }
 
 Eigen::VectorXd LossFunction::partial_dev_cost_to_state(const Eigen::VectorXd& current_state,const Eigen::VectorXd& control, int time_step){
-    if(time_step>2000 && time_step<2100)
+    if(time_step>1500 && time_step<1600)
         return 2*Q*dT*(current_state-state_traj[time_step]) + 2*Qa*dT*(current_state-state_a);
+        // return 2*Qa*dT*(current_state-state_a);
     else
         return 2*Q*dT*(current_state-state_traj[time_step]);
 }
